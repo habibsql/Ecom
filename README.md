@@ -32,31 +32,38 @@ Future Inhencement:
 5. Cross cutting code will be implemnted.
 6. Hashing will be implemted.
 
-Business Requirement trying to fit::
+The Business Requirement::
 
 The site should cater to the customer users who are logged in.
+
 Product Catalogue
-● It should be possible to categorise products.
-● Each product has the following fields:
-a. Title
-b. Description
-c. Image
-d. Price
-● The entire catalogue is visible if the user does not make and specific search query.
-● The product catalogue is paginated during display.
+
+ It should be possible to categorise products.
+ Each product has the following fields:
+        a. Title
+        b. Description
+        c. Image
+        d. Price
+	● The entire catalogue is visible if the user does not make and specific search query.
+	● The product catalogue is paginated during display.
+  
 Product Search
-● The customer can search for the product they want by typing into an input box and clicking
-"Search"
-● The fields in which searching happens is configurable from system end.
-● Search is case insensitive.
+    ● The customer can search for the product they want by typing into an input box and clicking
+  "Search"
+    ● The fields in which searching happens is configurable from system end.
+    ● Search is case insensitive.
+    
 Login Process
-● In order to complete checkout, all customers must log in using Google Account SSO.
-● The customer should not be required to add any additional login information like name,
-email etc, all should be retrieved from Google.
-● Phone can be collected additionally if required.
+    ● In order to complete checkout, all customers must log in using Google Account SSO.
+    ● The customer should not be required to add any additional login information like name,
+      email etc, all should be retrieved from Google.
+    ● Phone can be collected additionally if required.
+    
 Discount Coupon
-● During the checkout process the system allows the user to input a discount coupon code.
-● The coupon codes used are of a few varieties.
-○ Gives a flat discount of a fixed amount = 300 BDT.
-○ Gives a percentage discount with a max limit eg: 15% up to 300 BDT
-○ Gives a percentage discount with no max value.
+    ● During the checkout process the system allows the user to input a discount coupon code.
+    ● The coupon codes used are of a few varieties.
+        ○ Gives a flat discount of a fixed amount = 300 BDT.
+        ○ Gives a percentage discount with a max limit eg: 15% up to 300 BDT
+        ○ Gives a percentage discount with no max value.
+       
+       
