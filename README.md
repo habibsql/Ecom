@@ -1,4 +1,4 @@
-# Ecom (A sample Ecommer site)
+# Ecom (A sample Ecommer site [backend])
 
 Architecture: DDD using CQRS
 
