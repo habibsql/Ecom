@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Ecom.CommandHandlers\Ecom.CommandHandlers.csproj" />
+    <ProjectReference Include="..\Ecom.DomainServices\Ecom.DomainServices.csproj" />
+    <ProjectReference Include="..\Ecom.Framework\Ecom.Framework.csproj" />
+    <ProjectReference Include="..\Ecom.Queries\Ecom.Queries.csproj" />
+    <ProjectReference Include="..\Ecom.QueryHandlers\Ecom.QueryHandlers.csproj" />
+  </ItemGroup>
+
+
+</Project>
