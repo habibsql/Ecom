@@ -1,4 +1,4 @@
-# Ecom (A sample Ecommer site [backend])
+# Ecom (Ecommerce site backend)
 
 Problem Statement:: (Domain: Ecommerce)
 
