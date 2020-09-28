@@ -2,11 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Ecom.Repositories
 {
     public interface ICheckoutRepository : IRepository<Checkout>
     {
-        void Save(Checkout checkout);
+        Task Save(Checkout checkout);
     }
 }

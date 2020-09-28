@@ -11,5 +11,7 @@ namespace Ecom.Repositories
         Task<IEnumerable<Product>> SearchProducts(IEnumerable<string> searchableFields, string searchText, int pageNumber, int pageSize);
 
         Task<Product> GetProductById(Guid guid);
+
+        Task SaveProduct(Product product);
     }
 }

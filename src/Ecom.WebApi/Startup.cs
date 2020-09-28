@@ -65,7 +65,7 @@ namespace Ecom.WebApi
             services.AddSingleton<IProductService, ProductService>();
             services.AddSingleton<IDiscountStratigyProvider, DiscountStratigyProvider>();
 
-            services.AddSingleton<IMongoService, MongoService>();
+            services.AddSingleton<IMongoDbService, MongoDbService>();
             services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddSingleton<ICheckoutRepository, CheckoutRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();

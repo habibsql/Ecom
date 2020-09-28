@@ -1,15 +1,26 @@
 ﻿using Ecom.Domain.Entities;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Ecom.Repositories
 {
     public class CheckoutRepository : ICheckoutRepository
     {
-        public void Save(Checkout checkout)
+        private readonly IMongoDbService mongoDbService;
+
+        public CheckoutRepository(IMongoDbService mongoDbService)
         {
-            throw new NotImplementedException();
+            this.mongoDbService = mongoDbService;
+        }
+
+        public Task Save(Checkout checkout)
+        {
+            IMongoCollection<Checkout> checkoutCollection = mongoDbService.GetCollection<Checkout>(null, "Checkouts");
+
+            return checkoutCollection.InsertOneAsync(checkout);
         }
     }
 }

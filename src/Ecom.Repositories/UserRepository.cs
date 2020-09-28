@@ -1,4 +1,5 @@
 ﻿using Ecom.Domain.Entities;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,25 +9,30 @@ namespace Ecom.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public async Task<User> GetUserByEmail(string email)
-        {
-            // Todo: Mongodb will be used later
-            var user = new User
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = email,
-                Email = email,
-                Role = new UserRole { RoleName = "Customer" }
-            };
+        private readonly IMongoDbService mongoDbService;
 
-            return await Task.FromResult(user);
+        public UserRepository(IMongoDbService mongoDbService)
+        {
+            this.mongoDbService = mongoDbService;
+        }
+
+        public Task<User> GetUserByEmail(string email)
+        {
+            IMongoCollection<User> userCollection = mongoDbService.GetCollection<User>(null, "Users");
+
+            FilterDefinition<User> filter = Builders<User>.Filter.Eq(item => item.Email, email);
+
+            IFindFluent<User, User> userFluent = userCollection.Find(filter);          
+
+            return Task.FromResult(userFluent.FirstOrDefault());
         }
 
         public Task SaveUser(User user)
         {
-            //TODO: Save User object to the Mongodatabase using C# Mongodriver
+            IMongoCollection<User> userCollection = mongoDbService.GetCollection<User>(null, "Users");
 
-            return Task.CompletedTask;
+            return userCollection.ReplaceOneAsync<User>(item => item.Id == user.Id, user, new ReplaceOptions { IsUpsert = true });
         }
+
     } // end class
 }

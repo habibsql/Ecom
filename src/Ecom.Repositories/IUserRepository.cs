@@ -11,5 +11,6 @@ namespace Ecom.Repositories
         Task<User> GetUserByEmail(string email);
 
         Task SaveUser(User user);
+
     }
 }
