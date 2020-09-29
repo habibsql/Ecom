@@ -11,11 +11,16 @@ namespace Ecom.Repositories
     {
         private readonly IMongoDatabase mongoDatabase;
         private readonly IMongoClient mongoClient;
+        private readonly string DefaultDatabaseName;
+
+        public string DefaultDatabaseName1 => DefaultDatabaseName;
 
         public MongoDbService(IConfiguration configuration)
         {
-            string connString = configuration.GetConnectionString("DefaultConnection");
+            string connString = configuration.GetConnectionString("DefaultConnection");           
+            DefaultDatabaseName = configuration.GetConnectionString("DefaultDatabase");
             mongoClient = new MongoClient(connString);
+            mongoDatabase = mongoClient.GetDatabase(DefaultDatabaseName);
         }
 
         public IMongoDatabase GetDatabase(string databaseName)
@@ -30,7 +35,7 @@ namespace Ecom.Repositories
 
         public IMongoCollection<T> GetCollection<T>(string databaseName, string collectionName)
         {
-            IMongoDatabase database = string.IsNullOrEmpty(databaseName) ? mongoDatabase : mongoClient.GetDatabase(databaseName);
+            IMongoDatabase database = string.IsNullOrEmpty(databaseName) ? mongoClient.GetDatabase("TestDb") : mongoClient.GetDatabase(databaseName);
 
             return database.GetCollection<T>(collectionName);
         }
@@ -42,10 +47,8 @@ namespace Ecom.Repositories
 
         public Task EndTransactionAsync(IClientSessionHandle sessionHandle, bool commit)
         {
-            if (null == sessionHandle)
-            {
-                throw new ArgumentNullException("SessionHandle should not be null");
-            }
+            if (null == sessionHandle)            
+                throw new ArgumentNullException("SessionHandle should not be null");            
 
             if (commit)
             {
