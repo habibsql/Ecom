@@ -42,6 +42,13 @@ namespace Ecom.Repositories
 
         public Task<IClientSessionHandle> StartTransactionAsync()
         {
+            var sessionOptions = new ClientSessionOptions
+            {
+                CausalConsistency = true,
+
+            };
+            sessionOptions.DefaultTransactionOptions = new TransactionOptions();
+
             return mongoClient.StartSessionAsync();
         }
 
@@ -49,6 +56,11 @@ namespace Ecom.Repositories
         {
             if (null == sessionHandle)            
                 throw new ArgumentNullException("SessionHandle should not be null");            
+
+            if (!sessionHandle.IsInTransaction)
+            {               
+                return Task.CompletedTask;
+            }
 
             if (commit)
             {

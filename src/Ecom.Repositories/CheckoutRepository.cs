@@ -16,11 +16,11 @@ namespace Ecom.Repositories
             this.mongoDbService = mongoDbService;
         }
 
-        public Task Save(Checkout checkout)
+        public async Task Save(Checkout checkout)
         {
             IMongoCollection<Checkout> checkoutCollection = mongoDbService.GetCollection<Checkout>(null, "Checkouts");
 
-            return checkoutCollection.InsertOneAsync(checkout);
+            await checkoutCollection.InsertOneAsync(checkout);
         }
     }
 }
