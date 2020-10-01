@@ -8,14 +8,16 @@ namespace Ecom.Framework
     /// <summary>
     /// Google Account information
     /// </summary>
-    public class ExternalUserInfo
+    public class CreateLocalUserCommand
     {
         public string Name { get; set; }
 
         public string Email { get; set; }
 
-        public string ExternalUserId { get; set; }
-
         public string PhoneNumber { get; set; }
+
+        public string Password { get; set; }
+
+        public string RoleName { get; set; }
     }
 }

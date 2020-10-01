@@ -12,16 +12,18 @@ namespace Ecom.DomainServices
     {
         private const string CustomerRoleName = "Customer";
         private readonly IUserRepository userRepository;
+        private readonly IUserRoleRepository userRoleRepository;
+        private readonly IEncrptor encrptor;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository, IEncrptor encrptor)
         {
             this.userRepository = userRepository;
+            this.userRoleRepository = userRoleRepository;
+            this.encrptor = encrptor;
         }
 
-        public async Task<User> RegisterUser(ExternalUserInfo externalUser)
+        public async Task<User> RegisterUser(CreateExternalUserCommand externalUser)
         {
-            //TODO: validation...
-
             var user = new User
             {
                 Id = Guid.NewGuid().ToString(),
@@ -29,6 +31,26 @@ namespace Ecom.DomainServices
                 Email = externalUser.Email,
                 Phone = externalUser.PhoneNumber,
                 Role = new UserRole() { RoleName = CustomerRoleName }
+            };
+
+            await userRepository.SaveUser(user);
+
+            return user;
+        }
+
+        public async Task<User> RegisterUserLocal(CreateLocalUserCommand externalUser)
+        {
+            UserRole userRole = await userRoleRepository.GetRoleByName(externalUser.RoleName);
+            string passwordHash = await encrptor.HashAsync(externalUser.Password);
+
+            var user = new User
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = externalUser.Name,
+                Email = externalUser.Email,
+                Phone = externalUser.PhoneNumber,
+                Role = userRole,
+                Password = passwordHash
             };
 
             await userRepository.SaveUser(user);

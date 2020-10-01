@@ -62,26 +62,32 @@ namespace Ecom.WebApi
             services.AddSingleton(typeof(ICommandHandler<CheckoutCommand, CommandResponse>), typeof(CheckoutCommandHandler));
             services.AddSingleton(typeof(IQueryHandler<ProductSearchQuery, QueryResult>), typeof(ProductSearchQueryHandler));
 
+            //Framework services
+            services.AddSingleton<IEncrptor, Encryptor>();
+
+            // Doamin Services
             services.AddSingleton<IProductService, ProductService>();
             services.AddSingleton<IDiscountStratigyProvider, DiscountStratigyProvider>();
-
             services.AddSingleton<IMongoDbService, MongoDbService>();
+            services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IExternalUserService, GoogleUserService>();
+
+            // Repositories
             services.AddSingleton<IProductRepository, ProductRepository>();
             services.AddSingleton<ICheckoutRepository, CheckoutRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IUserRoleRepository, UserRoleRepository>();
 
-            //identity
+            // Identity
             services.AddSingleton<IAuthenticationService, AuthenticationService>();
             services.AddSingleton<ITokenService, JwtTokenService>();
             
             
+            // Web Context
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IHttpContextProvider, HttpContextProvider>();
-
             services.AddHttpClient();
-
-            services.AddSingleton<IUserService, UserService>(); 
-            services.AddSingleton<IExternalUserService, GoogleUserService>(); 
+            
 
             ConfigureJwtServices(services);
         }

@@ -31,5 +31,7 @@ namespace Ecom.Domain.Entities
         /// User may created from external source. Currently we consider it will be Google
         /// </summary>
         public string ExternalSourceName { get; set; } = "google";
+
+        public string Password { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace Ecom.WebApi.Identity
             this.httpClientFactory = httpClientFactory;
         }
 
-        public async Task<ExternalUserInfo> GetUserInfoAsync(string email)
+        public async Task<UserDto> GetUserInfoAsync(string email)
         {
             OAuthInfo oauthInfo = ecomConfigManager.GetOAthInfo();
             HttpClient httpClient = httpClientFactory.CreateClient();
@@ -53,7 +53,7 @@ namespace Ecom.WebApi.Identity
 
             var userDataJsonResponse = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Get, userAccessUrl));
             var userDataJson = await userDataJsonResponse.Content.ReadAsStringAsync();
-            var googleUserInfo = JsonConvert.DeserializeObject<ExternalUserInfo>(userDataJson);
+            var googleUserInfo = JsonConvert.DeserializeObject<UserDto>(userDataJson);
 
             return googleUserInfo;
         }

@@ -19,11 +19,16 @@ namespace Ecom.WebApi.Controllers
         }
 
         [HttpPost]
+        public async Task<CommandResponse> CreateProduct([FromBody] CreateProductCommand command)
+        {
+            return await commandManager.ExecuteAsync<CreateProductCommand, CommandResponse>(command);
+        }
+
+        [HttpPost]
         public async Task<CommandResponse> Checkout([FromBody] CheckoutCommand command)
         {
-            CommandResponse response = await commandManager.ExecuteAsync<CheckoutCommand, CommandResponse>(command);
-
-            return response;
+            return await commandManager.ExecuteAsync<CheckoutCommand, CommandResponse>(command);
         }
+
     }
 }

@@ -37,5 +37,12 @@ namespace Ecom.DomainServices
             return Task.CompletedTask;
         }
 
+        public Task CreateProduct(CreateProductCommand command)
+        {
+            Product product = Mapper.MapProduct(command);
+            product.Category = new ProductCategory { Id = command.CategoryId };
+
+            return productRepository.SaveProduct(product);
+        }
     }
 }

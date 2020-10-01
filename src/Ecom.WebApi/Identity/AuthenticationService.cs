@@ -27,14 +27,21 @@ namespace Ecom.WebApi.Identity
 
         public async Task<User> AuthenticateAsync(string userId)
         {
-            ExternalUserInfo externalUserInfo = await externalUserService.GetUserInfoAsync(userId);
-            User user = await userRepository.GetUserByEmail(externalUserInfo.Email);
+            UserDto userDto = await externalUserService.GetUserInfoAsync(userId);
+            User user = await userRepository.GetUserByEmail(userDto.Email);
 
             // if user not exists in local database, create first for reference
             if (null == user)
             {
-                user = await userService.RegisterUser(externalUserInfo);
-            }            
+                var externalUserCreateCommand = new CreateExternalUserCommand
+                {
+                    Name = userDto.Name,
+                    Email = userDto.Email,
+                    PhoneNumber = userDto.PhoneNumber
+                };
+
+                user = await userService.RegisterUser(externalUserCreateCommand);                
+            }
 
             return user;
         }

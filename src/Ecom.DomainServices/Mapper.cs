@@ -41,5 +41,18 @@ namespace Ecom.DomainServices
                 Role = new UserRole() { RoleName = loggedInContext.UserRole }
             };
         }
+
+        public static Product MapProduct(CreateProductCommand command)
+        {
+            var product = new Product
+            {
+                Id = Guid.NewGuid().ToString(),
+                Description = command.ProductDescription,
+                Image = command.ImagePath,
+                Price = command.Price              
+            };
+
+            return product;
+        }
     }
 }

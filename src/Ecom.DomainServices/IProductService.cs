@@ -10,5 +10,8 @@ namespace Ecom.DomainServices
     public interface IProductService
     {
         Task Checkout(CheckoutCommand command);
+
+        Task CreateProduct(CreateProductCommand command);
+
     }
 }

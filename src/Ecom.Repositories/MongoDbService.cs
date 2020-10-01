@@ -35,9 +35,16 @@ namespace Ecom.Repositories
 
         public IMongoCollection<T> GetCollection<T>(string databaseName, string collectionName)
         {
-            IMongoDatabase database = string.IsNullOrEmpty(databaseName) ? mongoClient.GetDatabase("TestDb") : mongoClient.GetDatabase(databaseName);
+            IMongoDatabase database = string.IsNullOrEmpty(databaseName) ? mongoClient.GetDatabase(DefaultDatabaseName) : mongoClient.GetDatabase(databaseName);
 
             return database.GetCollection<T>(collectionName);
+        }
+
+        public IMongoCollection<T> GetCollection<T>(string databaseName)
+        {
+            IMongoDatabase database = string.IsNullOrEmpty(databaseName) ? mongoClient.GetDatabase(DefaultDatabaseName) : mongoClient.GetDatabase(databaseName);
+
+            return database.GetCollection<T>($"{typeof(T).Name}s");
         }
 
         public Task<IClientSessionHandle> StartTransactionAsync()

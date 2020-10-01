@@ -15,6 +15,14 @@ namespace Ecom.Repositories
         /// <returns></returns>
         IMongoDatabase GetDatabase(string databaseName);
 
+        /// <summary>
+        /// Convenstion that followed -> Collection name would be pluralize from its type name. ex: UserRole -> UserRoles
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="databaseName"></param>
+        /// <returns></returns>
+        IMongoCollection<T> GetCollection<T>(string databaseName);
+
         IMongoCollection<T> GetCollection<T>(string databaseName, string collectionName);
 
         /// <summary>

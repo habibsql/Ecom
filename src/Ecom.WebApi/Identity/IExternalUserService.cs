@@ -11,6 +11,6 @@ namespace Ecom.WebApi.Identity
     /// </summary>
     public interface IExternalUserService
     {
-        Task<ExternalUserInfo> GetUserInfoAsync(string email);
+        Task<UserDto> GetUserInfoAsync(string email);
     }
 }
