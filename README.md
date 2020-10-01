@@ -1,6 +1,6 @@
 # Ecom (Ecommerce site backend)
 
-Problem Statement:: (Domain: Ecommerce)
+Problem Statement: (Domain: Ecommerce)
 
 The site should cater to the customer users who are logged in.
 
@@ -32,14 +32,17 @@ Login Process:
 	* Gives a percentage discount with a max limit eg: 15% up to 300 BDT
 	* Gives a percentage discount with no max value.
 	
-	
-Implementation Details::
+--------------------------------------------------------------------------------------------------------------------------------
+
+Implementation Details:
 
 Architecture: DDD with CQRS
 Platform: ASPNET Core
 Language: C#
 Database: NoSQL (MongoDb)
 Secutity: Jwt Token based Authorization
+
+---------------------------------------------------------------------------------------------------------------------------------
 
 Authentication flow: User provide gmail email address. System will check it is valid or not. If valid first time store fetched user info to the local database.
 Then Create a Jwt user token.
@@ -52,10 +55,8 @@ Microservice: Consider as Microservice architecture.
 User Interface: No User interface is provided. You need to use post man like tools for visualization.
 Unit test: Used xunit as unit test. Discount policy check there.
 
-Future Inhencement:
-1. For scalibility and asynchonous communication Message broker (Kafka) will be implemented.
-2. Docker/Kubernatis deployment sample will be shown.
-3. Event sourcing will be implemented.
-4. Integration test will be implemnted.
-5. Cross cutting code will be implemnted.
-6. Hashing will be implemted.
+Future may be added:
+1. For scalibility and asynchonous communication Message broker (Kafka, RabbitMq).
+2. Docker/Kubernatis based deployment.
+3. Event sourcing for working with historical data.
+4. Cross cutting framework.
